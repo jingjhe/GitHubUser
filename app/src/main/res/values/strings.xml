@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GitHubUser</string>
+
+    <string name="main_tab1">User</string>
+    <string name="main_tab2">Mine</string>
+
+    <string name="github">Github</string>
+    <string name="github_docs">GitHub Docs</string>
+    <string name="me_name">黃敬哲</string>
+    <string name="me_email">n621200n621200@gmail.com</string>
+
 </resources>
