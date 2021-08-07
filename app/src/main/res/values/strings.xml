@@ -8,5 +8,6 @@
     <string name="github_docs">GitHub Docs</string>
     <string name="me_name">黃敬哲</string>
     <string name="me_email">n621200n621200@gmail.com</string>
+    <string name="me_follower">%d followers.%d following </string>
 
 </resources>

@@ -1,16 +1,13 @@
 package com.practice.githubuser.view
 
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ProgressBar
-import android.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabItem
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.practice.githubuser.R
@@ -24,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mainViewModel = MainViewModel()
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initView()
         loadData()
     }
@@ -53,7 +50,6 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = GONE
             adapter.setFragmentList(it)
         })
-
 
     }
 
