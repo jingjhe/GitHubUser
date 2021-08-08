@@ -12,4 +12,7 @@ interface ApiService {
         @Path("userId") userId: String
     ): Observable<User>
 
+    @GET("/users")
+    fun getUsersList(
+    ): Observable<List<User>>
 }

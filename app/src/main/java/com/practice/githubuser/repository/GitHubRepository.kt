@@ -14,7 +14,10 @@ object GitHubRepository {
 
     fun getRemoteMeUserObserver():Observable<User>{
       return  apiService.getUserById(Config.MY_USER_ID)
+    }
 
+    fun getRemoteUsersListObserver():Observable<List<User>>{
+        return apiService.getUsersList()
     }
 
 }
