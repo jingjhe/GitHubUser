@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.practice.githubuser.model.User
 import com.practice.githubuser.repository.GitHubRepository
+import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class UserViewModel : ViewModel() {
@@ -13,6 +15,7 @@ class UserViewModel : ViewModel() {
     private var liveDataMeUser: MutableLiveData<User> = MutableLiveData()
     private var liveDataUsersList: MutableLiveData<ArrayList<User>> = MutableLiveData()
     private var liveDataUser: MutableLiveData<User> = MutableLiveData()
+    private var liveDataMessage:MutableLiveData<String> = MutableLiveData()
 
 
     private var gitHubRepo = GitHubRepository
@@ -30,13 +33,31 @@ class UserViewModel : ViewModel() {
         return liveDataUser
     }
 
+    fun getLiveDataMessage(): MutableLiveData<String>{
+        return liveDataMessage
+    }
     fun fetchMeData() {
         gitHubRepo.getRemoteMeUserObserver()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                liveDataMeUser.postValue(it)
-            }
+            .subscribe(object : Observer<User> {
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onNext(it: User) {
+                    liveDataMeUser.postValue(it)
+                }
+
+                override fun onError(e: Throwable) {
+                    liveDataMessage.postValue(e.message)
+                }
+
+                override fun onComplete() {
+                }
+
+            })
+
     }
 
 
@@ -45,9 +66,23 @@ class UserViewModel : ViewModel() {
         gitHubRepo.getRemoteUsersListObserver()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                liveDataUsersList.postValue(ArrayList(it))
-            }
+            .subscribe(object : Observer<List<User>> {
+                override fun onSubscribe(d: Disposable) {
+                }
+
+                override fun onNext(it: List<User>) {
+                    liveDataUsersList.postValue(ArrayList(it))
+                }
+
+                override fun onError(e: Throwable) {
+                    liveDataMessage.postValue(e.message)
+                }
+
+                override fun onComplete() {
+                }
+
+
+            })
 
     }
 
@@ -55,9 +90,24 @@ class UserViewModel : ViewModel() {
         gitHubRepo.getRemoteUserByLoginObserver(login)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                liveDataUser.postValue(it)
-            }
+            .subscribe(object : Observer<User> {
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onNext(it: User) {
+                    liveDataUser.postValue(it)
+                }
+
+                override fun onError(e: Throwable) {
+                    liveDataMessage.postValue(e.message)
+                }
+
+                override fun onComplete() {
+                }
+
+            })
+
     }
 
 }

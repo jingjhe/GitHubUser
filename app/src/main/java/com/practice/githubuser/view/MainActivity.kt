@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -55,6 +56,9 @@ class MainActivity : AppCompatActivity(), UserAdapter.OnItemActionListener {
         mainViewModel.getFragmentList()
         mainViewModel.liveDataFragmentList.observe(this, Observer {
             adapter.setFragmentList(it)
+        })
+        userViewModel.getLiveDataMessage().observe(this, Observer {
+            Toast.makeText(this,it,Toast.LENGTH_LONG).show()
         })
 
     }

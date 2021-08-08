@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -57,7 +59,7 @@ class UserActivity : AppCompatActivity() {
     private fun loadData(login: String) {
         userViewModel.fetchUserDataByLogin(login)
 
-        userViewModel.getLiveDataUser().observe(this, androidx.lifecycle.Observer {
+        userViewModel.getLiveDataUser().observe(this, Observer {
             tvUserName1.text = it.login
             tvUserName2.text = it.login
             tvUserLocal.text = it.location
@@ -69,6 +71,12 @@ class UserActivity : AppCompatActivity() {
                 .apply(options.circleCrop())
                 .into(imgUser)
         })
+
+
+        userViewModel.getLiveDataMessage().observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
+
 
     }
 
