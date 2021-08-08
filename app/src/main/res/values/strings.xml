@@ -8,6 +8,18 @@
     <string name="github_docs">GitHub Docs</string>
     <string name="me_name">黃敬哲</string>
     <string name="me_email">n621200n621200@gmail.com</string>
-    <string name="me_follower">%d followers.%d following </string>
-
+    <string name="me_follower">
+        <![CDATA[
+        <font color="#000000">%d</font>
+        <font color="#ADADAD">followers.</font>
+        <font color="#000000">%d</font>
+       <font color="#9D9D9D">following</font>
+	    ]]>
+    </string>
+    <string name="item_user_text"> <![CDATA[
+        <font color="#000000">%s</font>
+       <br>
+       <font color="#9D9D9D">%s</font>
+	    ]]>
+    </string>
 </resources>

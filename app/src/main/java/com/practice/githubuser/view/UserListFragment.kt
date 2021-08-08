@@ -1,5 +1,7 @@
 package com.practice.githubuser.view
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.practice.githubuser.R
 import com.practice.githubuser.viewmodel.UserViewModel
 
-class UsersFragment : Fragment() {
+class UserListFragment : Fragment() {
 
 
     private val userViewModel: UserViewModel by activityViewModels()
@@ -34,13 +36,13 @@ class UsersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             val decoration = DividerItemDecoration(activity, VERTICAL)
             addItemDecoration(decoration)
             userAdapter = UserAdapter()
+            userAdapter.setListener(activity as MainActivity)
             adapter = userAdapter
         }
         userViewModel.fetchUsersListData()

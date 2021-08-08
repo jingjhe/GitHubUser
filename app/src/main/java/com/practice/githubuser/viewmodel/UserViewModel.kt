@@ -12,6 +12,8 @@ class UserViewModel : ViewModel() {
 
     private var liveDataMeUser: MutableLiveData<User> = MutableLiveData()
     private var liveDataUsersList: MutableLiveData<ArrayList<User>> = MutableLiveData()
+    private var liveDataUser: MutableLiveData<User> = MutableLiveData()
+
 
     private var gitHubRepo = GitHubRepository
 
@@ -22,6 +24,10 @@ class UserViewModel : ViewModel() {
 
     fun getLiveDataUsersList(): MutableLiveData<ArrayList<User>> {
         return liveDataUsersList
+    }
+
+    fun getLiveDataUser(): MutableLiveData<User> {
+        return liveDataUser
     }
 
     fun fetchMeData() {
@@ -44,4 +50,14 @@ class UserViewModel : ViewModel() {
             }
 
     }
+
+    fun fetchUserDataByLogin(login: String) {
+        gitHubRepo.getRemoteUserByLoginObserver(login)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                liveDataUser.postValue(it)
+            }
+    }
+
 }

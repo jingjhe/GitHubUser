@@ -1,6 +1,7 @@
 package com.practice.githubuser.view
 
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,9 +40,8 @@ class MeFragment : Fragment() {
         val loginText = view.findViewById<TextView>(R.id.tvLogin)
         userViewModel.fetchMeData()
         userViewModel.getLiveDataMeUser().observe(viewLifecycleOwner, Observer {
-            val str = getString(R.string.me_follower)
-            val showStr = String.format(str, it.followers, it.following)
-            followingText.text = showStr
+            val str = getString(R.string.me_follower,it.followers, it.following)
+            followingText.text = Html.fromHtml(str,0)
             loginText.text = it.login
         })
 

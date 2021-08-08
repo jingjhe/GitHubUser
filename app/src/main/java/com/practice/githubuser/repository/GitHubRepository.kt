@@ -20,4 +20,8 @@ object GitHubRepository {
         return apiService.getUsersList()
     }
 
+    fun getRemoteUserByLoginObserver(login:String):Observable<User>{
+        return apiService.getUserById(login)
+    }
+
 }
