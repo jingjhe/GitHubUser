@@ -5,7 +5,7 @@
 1- Kotlin  
 2- MVVM design pattern  
 3- Retrofit2   
-4- gitHut Api  
+4- gitHub Api  
 5- LiveData  
 6- RxJava
 
